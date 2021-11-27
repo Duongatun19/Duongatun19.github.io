@@ -50,25 +50,6 @@ background-position: 0 50%;
 }
 @keyframes tuan
 {
-/* 0%{
-border-top: #fad8d8 2px solid;
-
-}
-25%{
-    border-top: #fad8d8 2px solid;
-    border-right: #fad8d8 2px solid;
-    transform:rotatey(120deg);
-    
-}
-
-50% {
-    border-top: #fad8d8 2px solid;
-    border-right: #fad8d8 2px solid;
-    border-bottom: #fad8d8 2px solid;
-    transform:rotatey(240deg);
-  
-  
-} */
 100% {
    border: 2px solid #fad8d8;
    transform:rotatey(360deg);
