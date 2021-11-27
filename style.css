@@ -42,6 +42,7 @@ background-position: 0 50%;
 	background-color: #242628;
 	overflow: hidden;
 	margin: 0 30px;
+	animation: tuan 15s alternate infinite;
 }
 
 .card__img {
@@ -55,7 +56,17 @@ background-position: 0 50%;
 	border: 4px solid #f2726a;
 	cursor: pointer;
 }
+.card:hover{
+    animation: none;
+}
+@keyframes tuan
+{
 
+100% {
+   border: 2px solid #fad8d8;
+   transform:rotatey(360deg);
+}
+}
 .card__img:hover {
 	width: 100%;
 	height: 100%;
