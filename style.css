@@ -16,6 +16,7 @@
 	align-items: center;
 	animation: change 10s ease-in-out infinite;
 	background-size: 400% 400%;
+	overflow-y:hidden;
 	
 }
 
