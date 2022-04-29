@@ -5,6 +5,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
+	overflow-y: hidden !important;
 }
 
 .b{
@@ -16,11 +17,12 @@
 	align-items: center;
 	animation: change 10s ease-in-out infinite;
 	background-size: 400% 400%;
-	overflow-y:hidden;
+	overflow-y: hidden !important;
 	
 }
 body{
-overflow-y:hidden;}
+overflow-y:hidden;
+overflow-y: hidden !important;}
 
 @keyframes change
 {
