@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<iframe src="tt.mp3" allow="autoplay" style="display:none" id="iframeAudio">
-</iframe
+		
 	 <audio controls autoplay   preload="auto" loop id="playAudio">
 		  <source src="tt.mp3" type="audio/mpeg">
 		</audio>
-		<script>
-			var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-  if (!isChrome){
-      $('#iframeAudio').remove()
-  }
-  else {
-      $('#playAudio').remove() // just to make sure that it will not have 2x audio in the background 
-  }
-		</script>
+		
 
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
