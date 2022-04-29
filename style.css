@@ -19,6 +19,8 @@
 	overflow-y:hidden;
 	
 }
+body{
+overflow-y:hidden;}
 
 @keyframes change
 {
