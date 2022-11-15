@@ -14,7 +14,7 @@
     background: radial-gradient(circle, rgba(0, 195, 255, 0.156) 46%, rgba(0,234,255,1) 100%);
     padding: 5px 30px;
     height: 160px;
-    line-height: 100px;
+    line-height: 160px;
     border-radius: 57% 43% 70% 30% / 30% 30% 70% 70% ;
     width: auto;
     animation: hehe 2s ease-in-out infinite;
