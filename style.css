@@ -7,7 +7,10 @@
 	font-family: 'Poppins', sans-serif;
 	overflow-y: hidden !important;
 }
-
+.the-a{
+    text-decoration: none !important;
+    color: #fad8d8 !important
+}
 .b{
 	height: 100vh;
 	background: linear-gradient(
