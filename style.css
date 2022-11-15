@@ -7,6 +7,9 @@
 	font-family: 'Poppins', sans-serif;
 	overflow-y: hidden !important;
 }
+#menu{
+    display: none;
+}
 .the-a{
     text-decoration: none !important;
     color: #fad8d8 !important
