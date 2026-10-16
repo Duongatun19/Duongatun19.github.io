@@ -12,10 +12,10 @@ document.addEventListener('click', function () {
 /* ===== Công cụ đổi mùa: nhấn phím S để mở/đóng ===== */
 (function () {
     var SEASONS = {
-        spring: { name: '🌸 Xuân', glyph: '❀', colors: ['#ffb7d1', '#ff8fb8', '#fff'], dy: [0.6, 1.4], dx: 0.5, size: [8, 16] },
-        summer: { name: '☀️ Hạ',  glyph: '●', colors: ['rgba(255,255,255,.55)', 'rgba(255,230,150,.6)'], dy: [-1.2, -0.4], dx: 0.3, size: [4, 12] },
-        autumn: { name: '🍂 Thu', glyph: '🍂', colors: ['#fff'], dy: [0.8, 1.8], dx: 1, size: [14, 22] },
-        winter: { name: '❄️ Đông', glyph: '❄', colors: ['#fff', '#dff3ff'], dy: [0.7, 1.7], dx: 0.4, size: [8, 18] }
+        spring: { name: '🌸 Xuân', shape: 'petal', colors: ['#ffb7d1', '#ff8fb8', '#ffe3ee'], dy: [0.6, 1.4], dx: 0.5, size: [8, 16] },
+        summer: { name: '☀️ Hạ',  shape: 'bubble', colors: ['rgba(255,255,255,.8)', 'rgba(255,236,170,.85)'], dy: [-1.2, -0.4], dx: 0.3, size: [4, 12] },
+        autumn: { name: '🍂 Thu', shape: 'maple', colors: ['#d9381e', '#f08a24', '#e6b422', '#a0522d'], dy: [0.8, 1.8], dx: 1, size: [14, 22] },
+        winter: { name: '❄️ Đông', shape: 'flake', colors: ['#ffffff', '#dff3ff'], dy: [0.7, 1.7], dx: 0.4, size: [8, 18] }
     };
     var KEYS = ['spring', 'summer', 'autumn', 'winter'];
     var body = document.body, canvas = document.getElementById('fx'), ctx = canvas.getContext('2d');
@@ -28,6 +28,39 @@ document.addEventListener('click', function () {
         var m = new Date().getMonth() + 1;
         return m <= 3 ? 'spring' : m <= 6 ? 'summer' : m <= 9 ? 'autumn' : 'winter';
     }
+    var DRAW = {
+        petal: function (r, c) {
+            ctx.fillStyle = c; ctx.beginPath();
+            ctx.moveTo(0, -r);
+            ctx.bezierCurveTo(r * 0.9, -r * 0.6, r * 0.7, r * 0.6, 0, r);
+            ctx.bezierCurveTo(-r * 0.7, r * 0.6, -r * 0.9, -r * 0.6, 0, -r * 0.8);
+            ctx.fill();
+        },
+        bubble: function (r, c) {
+            ctx.strokeStyle = c; ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.stroke();
+            ctx.fillStyle = c; ctx.beginPath();
+            ctx.arc(-r * 0.35, -r * 0.35, r * 0.18, 0, 6.283); ctx.fill();
+        },
+        maple: function (r, c) {
+            ctx.fillStyle = c; ctx.beginPath();
+            var pts = [[0,-1],[.25,-.55],[.7,-.7],[.55,-.2],[1,0],[.5,.2],[.55,.6],[.1,.45],[0,1],[-.1,.45],[-.55,.6],[-.5,.2],[-1,0],[-.55,-.2],[-.7,-.7],[-.25,-.55]];
+            pts.forEach(function (q, i) { ctx[i ? 'lineTo' : 'moveTo'](q[0] * r, q[1] * r); });
+            ctx.closePath(); ctx.fill();
+            ctx.strokeStyle = 'rgba(0,0,0,.25)'; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(0, -r * .8); ctx.lineTo(0, r * 1.3); ctx.stroke();
+        },
+        flake: function (r, c) {
+            ctx.strokeStyle = c; ctx.lineWidth = Math.max(1, r / 9); ctx.lineCap = 'round';
+            for (var i = 0; i < 6; i++) {
+                ctx.save(); ctx.rotate(i * Math.PI / 3);
+                ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -r);
+                ctx.moveTo(0, -r * .55); ctx.lineTo(r * .3, -r * .8);
+                ctx.moveTo(0, -r * .55); ctx.lineTo(-r * .3, -r * .8);
+                ctx.stroke(); ctx.restore();
+            }
+        }
+    };
     function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
     function rnd(a, b) { return a + Math.random() * (b - a); }
 
@@ -60,9 +93,7 @@ document.addEventListener('click', function () {
             p.x += p.vx + Math.sin(p.y / 40) * 0.3; p.y += p.vy; p.rot += p.vr;
             if (p.y > canvas.height + 30 || p.y < -30) particles[i] = spawn(s, false);
             ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-            ctx.fillStyle = p.color; ctx.font = p.size + 'px sans-serif';
-            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-            ctx.fillText(s.glyph, 0, 0); ctx.restore();
+            DRAW[s.shape](p.size, p.color); ctx.restore();
         });
         requestAnimationFrame(tick);
     }
