@@ -108,6 +108,11 @@ document.addEventListener('click', function () {
     panel.addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (b) setMode(b.dataset.m);
     });
+    var toggle = document.createElement('button');
+    toggle.id = 'season-toggle'; toggle.type = 'button';
+    toggle.setAttribute('aria-label', 'Đổi mùa'); toggle.textContent = '🍃';
+    toggle.addEventListener('click', function () { panel.classList.toggle('open'); });
+    body.appendChild(toggle);
     panel.addEventListener('contextmenu', function (e) { e.stopPropagation(); });
 
     document.addEventListener('keydown', function (e) {
